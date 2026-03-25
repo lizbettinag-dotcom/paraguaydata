@@ -1,4 +1,4 @@
-# paraguaydata <img src="https://www.ine.gov.py/assets/images/favicon.ico" align="right" width="100"/>
+# paraguaydata
 
 <!-- badges: start -->
 ![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)
@@ -109,15 +109,25 @@ brecha_genero(ephc, indicador = "anos_estudio")
 | `A17A` | Anos de estudio acumulados | Numerico |
 | `Factor` | Factor de expansion | Numerico |
 
+## Licencia de datos
+
+Los datos utilizados por este paquete provienen del Instituto Nacional
+de Estadistica (INE) de Paraguay y estan disponibles bajo la
+Licencia de Uso de la Informacion Publica del Estado Paraguayo, que
+autoriza su uso, transformacion y redistribucion citando la fuente.
+Mas informacion en: https://www.paraguay.gov.py/datos-abiertos/licencias
+
 ## Citacion
 
 Si usas este paquete en tu investigacion, por favor citalo como:
-```
-Garcia, L. (2025). paraguaydata: Acceso y analisis de datos abiertos
-del INE Paraguay. R package version 0.1.0.
-https://github.com/lizbettinag-dotcom/paraguaydata
-```
 
-## Licencia
+    Garcia, L. (2025). paraguaydata: Acceso y analisis de datos abiertos
+    del INE Paraguay. R package version 0.1.0.
+    https://github.com/lizbettinag-dotcom/paraguaydata
 
-MIT © Liz Garcia
+    Fuente de datos: Instituto Nacional de Estadistica (INE) de Paraguay.
+    https://www.ine.gov.py
+
+## Licencia del paquete
+
+MIT (c) Liz Garcia
