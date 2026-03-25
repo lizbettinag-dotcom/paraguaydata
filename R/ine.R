@@ -120,10 +120,20 @@ ine_ipm <- function(anio = 2024) {
     stop("No se encontraron datos del IPM para el anio ", anio)
   }
 
-  url_csv <- archivos$url[1]
-  message("Descargando: ", basename(url_csv))
+  # Codificar espacios en la URL
+  url_csv <- utils::URLencode(archivos$url[1])
+  message("Descargando: ", basename(archivos$url[1]))
 
-  readr::read_csv(url_csv, show_col_types = FALSE)
+  datos <- readr::read_csv2(
+    url_csv,
+    locale = readr::locale(encoding = "latin1"),
+    show_col_types = FALSE
+  )
+
+  # Corregir nombres de columnas con encoding incorrecto
+  names(datos) <- gsub("A\u00c3\u00b1oest", "Añoest", names(datos))
+
+  datos
 }
 
 #' Descargar codigos geograficos del INE
