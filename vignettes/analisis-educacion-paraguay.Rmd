@@ -1,0 +1,179 @@
+---
+title: "Analisis de educacion y desarrollo en Paraguay"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Analisis de educacion y desarrollo en Paraguay}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment  = "#>",
+  eval     = FALSE
+)
+```
+
+## Introduccion
+
+El paquete `paraguaydata` permite acceder y analizar microdatos oficiales
+del Instituto Nacional de Estadistica (INE) de Paraguay. Este tutorial
+muestra un flujo de trabajo completo para investigacion en educacion
+y desarrollo social, reproducible y listo para publicacion academica.
+
+## Instalacion
+```{r instalacion}
+# install.packages("devtools")
+devtools::install_github("lizbettinag-dotcom/paraguaydata")
+```
+
+## Cargar el paquete
+```{r cargar}
+library(paraguaydata)
+```
+
+## 1. Acceso a datos
+
+### Catalogo de microdatos disponibles
+```{r catalogo}
+catalogo <- ine_catalogo()
+nrow(catalogo)
+head(catalogo)
+```
+
+### Descargar datos de la EPHC
+
+La Encuesta Permanente de Hogares Continua (EPHC) es la principal fuente
+de informacion sobre condiciones de vida, empleo y educacion en Paraguay.
+```{r ephc}
+# Primer trimestre 2024
+ephc <- ine_ephc(anio = 2024, trimestre = 1)
+dim(ephc)
+```
+
+### Descargar el Indice de Pobreza Multidimensional
+```{r ipm}
+ipm <- ine_ipm(anio = 2024)
+dim(ipm)
+```
+
+### Codigos geograficos
+```{r geo}
+departamentos <- ine_geo("departamentos")
+departamentos
+```
+
+## 2. Indicadores educativos
+
+### Tasa de escolarizacion
+
+La Tasa Neta de Escolarizacion (TNE) mide la proporcion de personas
+en edad escolar que asisten a un establecimiento educativo.
+```{r escolarizacion}
+# Tasa general
+tasa_escolarizacion(ephc)
+
+# Por area geografica
+tasa_escolarizacion(ephc, grupo = "area")
+
+# Por sexo
+tasa_escolarizacion(ephc, grupo = "sexo")
+```
+
+### Anos promedio de estudio
+
+Indicador de capital humano que mide el nivel educativo acumulado
+de la poblacion adulta (UNDP, 2010).
+```{r anos}
+anios_promedio_estudio(ephc)
+```
+
+### Rezago educativo
+
+Proporcion de estudiantes que asisten a un nivel educativo para el
+cual tienen mas edad de la normativamente esperada (UNESCO, 2012).
+```{r rezago}
+rezago_educativo(ephc)
+```
+
+## 3. Analisis de desigualdad
+
+### Brecha urbano-rural
+```{r brecha-area}
+# En escolarizacion
+brecha_urbano_rural(ephc)
+
+# En anos de estudio
+brecha_urbano_rural(ephc, indicador = "anos_estudio")
+```
+
+### Brecha de genero
+
+El Indice de Paridad de Genero (IPG) mide la relacion entre el
+indicador femenino y masculino. Un IPG = 1 indica paridad perfecta.
+```{r brecha-genero}
+# En escolarizacion
+brecha_genero(ephc)
+
+# En anos de estudio
+brecha_genero(ephc, indicador = "anos_estudio")
+```
+
+## 4. Educacion y pobreza multidimensional
+
+Integracion de la EPHC con el IPM para analizar la relacion entre
+nivel educativo y condicion de pobreza del hogar (Sen, 1999).
+```{r pobreza}
+educacion_pobreza(ephc, ipm)
+```
+
+## 5. Ejemplo de analisis reproducible
+
+Flujo completo para un articulo sobre desigualdad educativa en Paraguay:
+```{r analisis-completo}
+library(paraguaydata)
+
+# Descargar datos
+ephc <- ine_ephc(2024, 1)
+ipm  <- ine_ipm(2024)
+
+# Tabla 1: Indicadores educativos generales
+tabla_1 <- data.frame(
+  Indicador = c(
+    "Tasa de escolarizacion (%)",
+    "Anos promedio de estudio",
+    "Tasa de rezago educativo (%)"
+  ),
+  Valor = c(
+    tasa_escolarizacion(ephc)$tasa_escolarizacion,
+    anios_promedio_estudio(ephc)$anos_promedio_estudio,
+    rezago_educativo(ephc)$tasa_rezago
+  )
+)
+tabla_1
+
+# Tabla 2: Brechas educativas
+brecha_ur  <- brecha_urbano_rural(ephc)
+brecha_gen <- brecha_genero(ephc)
+
+tabla_2 <- data.frame(
+  Dimension   = c("Urbano", "Rural", "Hombre", "Mujer"),
+  Escolarizacion = c(
+    brecha_ur$valor[brecha_ur$grupo == "Urbana"],
+    brecha_ur$valor[brecha_ur$grupo == "Rural"],
+    brecha_gen$valor[brecha_gen$grupo == "Hombre"],
+    brecha_gen$valor[brecha_gen$grupo == "Mujer"]
+  )
+)
+tabla_2
+```
+
+## Referencias
+
+- Alkire, S. & Foster, J. (2011). Counting and multidimensional poverty
+  measurement. *Journal of Public Economics*, 95(7-8), 476-487.
+- INE Paraguay (2024). Encuesta Permanente de Hogares Continua.
+  https://www.ine.gov.py
+- Sen, A. (1999). *Development as Freedom*. Oxford University Press.
+- UNDP (2010). *Human Development Report 2010*. United Nations.
+- UNESCO (2012). *International Standard Classification of Education*.
