@@ -45,7 +45,7 @@ ine_catalogo <- function() {
 #' }
 ine_ephc <- function(anio = 2024, trimestre = 1) {
 
-  anios_validos     <- 2017:2025
+  anios_validos      <- 2017:2025
   trimestres_validos <- 1:4
 
   if (!anio %in% anios_validos) {
@@ -56,29 +56,40 @@ ine_ephc <- function(anio = 2024, trimestre = 1) {
     stop("El trimestre debe ser 1, 2, 3 o 4")
   }
 
-  # Obtener catalogo y filtrar CSV de EPHC
+  # Obtener catalogo y filtrar CSV de EPHC trimestral
   catalogo <- ine_catalogo()
 
-  patron <- paste0("EPHC.*", anio, ".*csv|", anio, ".*EPHC.*csv")
-
   archivos <- catalogo[
-    grepl(patron, catalogo$url, ignore.case = TRUE) &
-      grepl(trimestre, catalogo$url),
+    grepl(paste0("EPHC-", anio), catalogo$url, ignore.case = TRUE) &
+      grepl("\\.csv$", catalogo$url, ignore.case = TRUE) &
+      grepl("REG02", catalogo$url, ignore.case = TRUE),
   ]
 
-  # Filtrar el trimestre correcto
-  nombres_trim <- c("1er", "2", "3er", "4")
-  archivos <- archivos[grepl(nombres_trim[trimestre], archivos$url), ]
+  # Filtrar por trimestre
+  patrones_trim <- c("1er", "2", "3er", "4")
+  archivos <- archivos[
+    grepl(patrones_trim[trimestre], archivos$url, ignore.case = TRUE),
+  ]
 
   if (nrow(archivos) == 0) {
     stop("No se encontraron datos para el anio ", anio,
          " trimestre ", trimestre)
   }
 
-  url_csv <- archivos$url[1]
-  message("Descargando: ", basename(url_csv))
+  # Codificar espacios en la URL
+  url_csv <- utils::URLencode(archivos$url[1])
+  message("Descargando: ", basename(archivos$url[1]))
 
-  readr::read_csv(url_csv, show_col_types = FALSE)
+  datos <- readr::read_csv2(
+    url_csv,
+    locale = readr::locale(encoding = "latin1"),
+    show_col_types = FALSE
+  )
+
+  # Corregir nombre de columna con encoding incorrecto
+  names(datos) <- gsub("A\u00c3\u00b1oest", "Añoest", names(datos))
+
+  datos
 }
 
 #' Descargar indice de pobreza multidimensional del INE
