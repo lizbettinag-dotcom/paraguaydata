@@ -11,4 +11,9 @@ RoxygenNote: 7.3.3
 URL: https://github.com/lizbettinag-dotcom/paraguaydata
 BugReports: https://github.com/lizbettinag-dotcom/paraguaydata/issues
 Imports: 
-    rvest
+    dplyr,
+    httr2,
+    readr,
+    rlang,
+    rvest,
+    tools
