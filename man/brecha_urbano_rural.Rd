@@ -7,25 +7,24 @@
 brecha_urbano_rural(data, indicador = "escolarizacion", ponderado = TRUE)
 }
 \arguments{
-\item{data}{data.frame proveniente de ine_ephc(). Debe contener
-AREA y al menos una variable educativa (A05 o A01).}
+\item{data}{data.frame de ine_ephc(). Requiere AREA y variables
+educativas segun indicador seleccionado.}
 
-\item{indicador}{Indicador a comparar. Valores posibles:
-"escolarizacion" o "anos_estudio". Por defecto "escolarizacion".}
+\item{indicador}{Indicador a comparar: "escolarizacion" o "anos_estudio".
+Por defecto "escolarizacion".}
 
-\item{ponderado}{Logico. Si TRUE usa el factor de expansion.
-Por defecto TRUE.}
+\item{ponderado}{Logico. Si TRUE usa Factor de expansion. Por defecto TRUE.}
 }
 \value{
-Un tibble con las columnas: area, valor, brecha_absoluta,
+Un tibble con columnas: grupo, valor, brecha_absoluta,
 brecha_relativa.
 }
 \description{
 Compara indicadores educativos entre poblacion urbana y rural.
-La brecha educativa urbano-rural es un indicador clave de
-desigualdad territorial ampliamente utilizado en informes de
-desarrollo humano (PNUD, 2019). Se calculan diferencias absolutas
-(en puntos porcentuales) y relativas (ratio urbano/rural).
+La brecha territorial es un indicador clave de desigualdad en
+informes de desarrollo humano (PNUD, 2019). Usa AREA de la EPHC
+donde 1 = urbana y 6 = rural. Se calculan diferencias absolutas
+(puntos porcentuales) y relativas (ratio urbano/rural).
 }
 \examples{
 \dontrun{

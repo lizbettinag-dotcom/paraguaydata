@@ -7,24 +7,22 @@
 rezago_educativo(data, ponderado = TRUE)
 }
 \arguments{
-\item{data}{data.frame proveniente de ine_ephc(). Debe contener
-P02 (edad), A01 (nivel educativo), A05 (asistencia escolar)
-y opcionalmente Factor (factor de expansion).}
+\item{data}{data.frame de ine_ephc(). Requiere P02, A14REC, A05 y
+opcionalmente Factor.}
 
-\item{ponderado}{Logico. Si TRUE usa el factor de expansion.
-Por defecto TRUE.}
+\item{ponderado}{Logico. Si TRUE usa Factor de expansion. Por defecto TRUE.}
 }
 \value{
-Un tibble con las columnas:
-n_total, n_rezago, tasa_rezago (en porcentaje).
+Un tibble con columnas: n_total, n_rezago, tasa_rezago (porcentaje).
 }
 \description{
-Identifica y cuantifica la proporcion de poblacion en edad escolar
-que presenta sobreedad o atraso escolar. Se define como rezago
-educativo la condicion en que una persona asiste a un nivel
-educativo para el cual tiene mas anos de los normativamente
-esperados (UNESCO, 2012). El criterio utilizado es: edad observada
+Identifica la proporcion de poblacion en edad escolar con sobreedad
+o atraso escolar. Se define como rezago la condicion en que una
+persona asiste a un nivel educativo para el cual tiene mas anos de
+los normativamente esperados (UNESCO, 2012). Criterio: edad observada
 mayor a (edad normativa del nivel + 2 anos de tolerancia).
+Usa A14REC para el nivel educativo (1-8) y A05 para asistencia
+(1 = asiste).
 }
 \examples{
 \dontrun{

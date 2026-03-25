@@ -7,25 +7,22 @@
 anios_promedio_estudio(data, edad_min = 25, ponderado = TRUE)
 }
 \arguments{
-\item{data}{data.frame proveniente de ine_ephc(). Debe contener
-las variables A01 (nivel educativo), P02 (edad) y opcionalmente
-Factor (factor de expansion).}
+\item{data}{data.frame de ine_ephc(). Requiere A17A, P02 y opcionalmente
+Factor.}
 
 \item{edad_min}{Edad minima para el calculo. Por defecto 25.}
 
-\item{ponderado}{Logico. Si TRUE usa el factor de expansion.
-Por defecto TRUE.}
+\item{ponderado}{Logico. Si TRUE usa Factor de expansion. Por defecto TRUE.}
 }
 \value{
-Un tibble con las columnas:
-n (poblacion), anos_promedio_estudio, error_estandar.
+Un tibble con columnas: n, anos_promedio_estudio, error_estandar.
 }
 \description{
-Calcula el promedio de anos de escolaridad acumulados por la
-poblacion de 25 anos o mas. Este indicador es ampliamente
-utilizado en investigacion sobre capital humano y desarrollo
-economico (UNDP, 2010). Se basa en la variable de nivel
-educativo maximo alcanzado (A01) de la EPHC.
+Calcula el promedio de anos de escolaridad acumulados por la poblacion
+de 25 anos o mas. Indicador de capital humano ampliamente usado en
+investigacion sobre desarrollo economico (UNDP, 2010). Usa la variable
+A17A de la EPHC que registra directamente los anos de estudio
+acumulados de cada persona.
 }
 \examples{
 \dontrun{

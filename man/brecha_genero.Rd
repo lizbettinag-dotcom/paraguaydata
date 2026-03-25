@@ -7,26 +7,25 @@
 brecha_genero(data, indicador = "escolarizacion", ponderado = TRUE)
 }
 \arguments{
-\item{data}{data.frame proveniente de ine_ephc(). Debe contener
-P03 (sexo) y al menos una variable educativa.}
+\item{data}{data.frame de ine_ephc(). Requiere P06 y variables
+educativas segun indicador seleccionado.}
 
-\item{indicador}{Indicador a comparar. Valores posibles:
-"escolarizacion" o "anos_estudio". Por defecto "escolarizacion".}
+\item{indicador}{Indicador a comparar: "escolarizacion" o "anos_estudio".
+Por defecto "escolarizacion".}
 
-\item{ponderado}{Logico. Si TRUE usa el factor de expansion.
-Por defecto TRUE.}
+\item{ponderado}{Logico. Si TRUE usa Factor de expansion. Por defecto TRUE.}
 }
 \value{
-Un tibble con las columnas: grupo (sexo), valor,
-brecha_absoluta (hombre - mujer), indice_paridad_genero.
+Un tibble con columnas: grupo, valor, brecha_absoluta
+(hombre - mujer), indice_paridad_genero.
 }
 \description{
-Compara indicadores educativos entre hombres y mujeres.
-La brecha de genero en educacion es un indicador fundamental
-para el monitoreo de los Objetivos de Desarrollo Sostenible
-(ODS 4 y ODS 5). Se calcula como la diferencia absoluta y
-el ratio entre el indicador femenino y masculino (indice de
-paridad de genero, IPG).
+Compara indicadores educativos entre hombres y mujeres. Indicador
+fundamental para el monitoreo de los ODS 4 y 5 (ONU, 2015).
+Se calcula la diferencia absoluta y el Indice de Paridad de Genero
+(IPG = valor femenino / valor masculino). Un IPG = 1 indica
+paridad; menor a 1 indica desventaja femenina. Usa P06 de la EPHC
+donde 1 = hombre y 6 = mujer.
 }
 \examples{
 \dontrun{

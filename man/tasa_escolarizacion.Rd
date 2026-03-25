@@ -6,52 +6,42 @@
 \usage{
 tasa_escolarizacion(
   data,
-  edad_min = 6,
+  edad_min = 10,
   edad_max = 18,
   grupo = "ninguno",
   ponderado = TRUE
 )
 }
 \arguments{
-\item{data}{data.frame proveniente de ine_ephc(). Debe contener
-las variables P02 (edad), A05 (asistencia escolar) y opcionalmente
-Factor (factor de expansion), P03 (sexo) y AREA (area geografica).}
+\item{data}{data.frame de ine_ephc(). Requiere P02, A05 y opcionalmente
+Factor, P06, AREA.}
 
-\item{edad_min}{Edad minima del rango escolar. Por defecto 6.}
+\item{edad_min}{Edad minima del rango escolar. Por defecto 10.}
 
 \item{edad_max}{Edad maxima del rango escolar. Por defecto 18.}
 
-\item{grupo}{Variable de agrupacion opcional. Valores posibles:
-"ninguno", "sexo", "area". Por defecto "ninguno".}
+\item{grupo}{Variable de agrupacion: "ninguno", "sexo" o "area".
+Por defecto "ninguno".}
 
-\item{ponderado}{Logico. Si TRUE usa el factor de expansion.
-Por defecto TRUE.}
+\item{ponderado}{Logico. Si TRUE usa Factor de expansion. Por defecto TRUE.}
 }
 \value{
-Un tibble con la tasa de escolarizacion. Si grupo es
-"ninguno" retorna una fila con tasa general. Si se especifica
-grupo retorna una fila por categoria con las columnas:
-grupo, n_asiste, n_total, tasa_escolarizacion.
+Un tibble con columnas: grupo, n_asiste, n_total,
+tasa_escolarizacion (en porcentaje).
 }
 \description{
 Calcula la proporcion de personas que asisten a un establecimiento
-educativo dentro de un rango de edad determinado. Este indicador
-corresponde a la Tasa Neta de Escolarizacion (TNE), definida como
-el cociente entre la poblacion en edad escolar que asiste a la
-escuela y la poblacion total en ese rango de edad. Permite el uso
-de factores de expansion para estimaciones poblacionales.
+educativo dentro de un rango de edad determinado. Corresponde a la
+Tasa Neta de Escolarizacion (TNE), definida como el cociente entre
+la poblacion en edad escolar que asiste y la poblacion total en ese
+rango de edad. Usa la variable A05 de la EPHC (1 = asiste, 6 = no
+asiste) y permite ponderacion por factor de expansion.
 }
 \examples{
 \dontrun{
 ephc <- ine_ephc(2024, 1)
-
-# Tasa general
 tasa_escolarizacion(ephc)
-
-# Por area geografica
 tasa_escolarizacion(ephc, grupo = "area")
-
-# Por sexo sin ponderar
 tasa_escolarizacion(ephc, grupo = "sexo", ponderado = FALSE)
 }
 }

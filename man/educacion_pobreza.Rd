@@ -7,11 +7,10 @@
 educacion_pobreza(data_ephc, data_ipm, edad_min = 25)
 }
 \arguments{
-\item{data_ephc}{data.frame proveniente de ine_ephc(). Debe contener
-UPM, NVIVI, NHOGA, A01 (nivel educativo) y P02 (edad).}
+\item{data_ephc}{data.frame de ine_ephc(). Requiere UPM, NVIVI, NHOGA,
+A14REC y P02.}
 
-\item{data_ipm}{data.frame proveniente de ine_ipm(). Debe contener
-hhid y pobrezai.}
+\item{data_ipm}{data.frame de ine_ipm(). Requiere hhid y pobrezai.}
 
 \item{edad_min}{Edad minima para el calculo. Por defecto 25.}
 }
@@ -21,11 +20,11 @@ Columnas: nivel_educativo, condicion_pobreza, n, porcentaje.
 }
 \description{
 Integra informacion educativa de la EPHC con el Indice de Pobreza
-Multidimensional (IPM) del INE. Permite analizar la relacion entre
-nivel educativo alcanzado y la condicion de pobreza multidimensional
-del hogar. Esta integracion es fundamental para investigacion sobre
-trampas de pobreza y retornos a la educacion (Sen, 1999;
-Alkire y Foster, 2011).
+Multidimensional (IPM) del INE. Analiza la relacion entre nivel
+educativo alcanzado y condicion de pobreza multidimensional del hogar.
+Fundamental para investigacion sobre trampas de pobreza y retornos
+a la educacion (Sen, 1999; Alkire y Foster, 2011). La union se
+realiza por identificador de hogar construido desde UPM, NVIVI y NHOGA.
 }
 \examples{
 \dontrun{
