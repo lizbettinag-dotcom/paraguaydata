@@ -293,8 +293,8 @@ brecha_urbano_rural <- function(data,
     resultado <- tasa_escolarizacion(data,
                                      grupo     = "area",
                                      ponderado = ponderado) |>
-      dplyr::rename(valor = .data$tasa_escolarizacion) |>
-      dplyr::select(.data$grupo, .data$valor)
+      dplyr::rename(valor = "tasa_escolarizacion") |>
+      dplyr::select("grupo", "valor")
 
   } else {
 
@@ -383,8 +383,8 @@ brecha_genero <- function(data,
     resultado <- tasa_escolarizacion(data,
                                      grupo     = "sexo",
                                      ponderado = ponderado) |>
-      dplyr::rename(valor = .data$tasa_escolarizacion) |>
-      dplyr::select(.data$grupo, .data$valor)
+      dplyr::rename(valor = "tasa_escolarizacion") |>
+      dplyr::select("grupo", "valor")
 
   } else {
 
@@ -512,7 +512,7 @@ educacion_pobreza <- function(data_ephc,
       condicion_pobreza = etiquetas_pobreza[as.character(.data$pobrezai)]
     ) |>
     dplyr::filter(!is.na(.data$condicion_pobreza)) |>
-    dplyr::select(.data$hhid, .data$condicion_pobreza)
+    dplyr::select("hhid", "condicion_pobreza")
 
   combinado <- dplyr::inner_join(
     ephc_hogar,
