@@ -17,6 +17,7 @@ Imports:
     readr,
     rlang,
     rvest,
+    scales,
     tools
 Suggests: 
     knitr,
