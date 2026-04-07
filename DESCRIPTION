@@ -18,6 +18,7 @@ Imports:
     rlang,
     rvest,
     scales,
+    tibble,
     tidyr,
     tools
 Suggests: 
