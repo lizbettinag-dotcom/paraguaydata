@@ -69,8 +69,8 @@ ine_serie <- function(anio_inicio = 2022,
     })
   }
 
-  # Eliminar trimestres que fallaron
-  lista <- lista[!sapply(lista, is.null)]
+  # Eliminar trimestres que fallaron (type-safe con vapply)
+  lista <- lista[!vapply(lista, is.null, logical(1))]
 
   if (length(lista) == 0) {
     stop("No se pudo descargar ningun trimestre")
@@ -134,8 +134,7 @@ tendencia_escolarizacion <- function(serie,
     stop("grupo debe ser 'ninguno', 'area' o 'sexo'")
   }
 
-  periodos <- unique(serie$PERIODO)
-  periodos <- sort(periodos)
+  periodos <- sort(unique(serie$PERIODO))
 
   lista <- vector("list", length(periodos))
 
@@ -188,7 +187,8 @@ tendencia_escolarizacion <- function(serie,
     lista[[i]] <- resultado
   }
 
-  lista <- lista[!sapply(lista, is.null)]
+  # Eliminar periodos que fallaron (type-safe con vapply)
+  lista <- lista[!vapply(lista, is.null, logical(1))]
 
   if (length(lista) == 0) {
     stop("No se pudo calcular el indicador para ningun periodo")

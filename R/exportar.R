@@ -53,6 +53,10 @@ exportar_word <- function(data,
                    fuente, ".")
   }
 
+  # Identificar columnas numericas y de texto (type-safe con vapply)
+  cols_num <- which(vapply(data, is.numeric, logical(1)))
+  cols_chr <- which(vapply(data, is.character, logical(1)))
+
   # Crear tabla base con formato APA
   ft <- flextable::flextable(data) |>
     flextable::font(fontname = "Times New Roman", part = "all") |>
@@ -71,16 +75,18 @@ exportar_word <- function(data,
       border = officer::fp_border(width = 1.5),
       part   = "body"
     ) |>
-    flextable::align(align = "left",  part = "header") |>
-    flextable::align(
-      align = "right", part = "body",
-      j     = which(sapply(data, is.numeric))
-    ) |>
-    flextable::align(
-      align = "left", part = "body",
-      j     = which(sapply(data, is.character))
-    ) |>
-    flextable::autofit()
+    flextable::align(align = "left", part = "header")
+
+  if (length(cols_num) > 0) {
+    ft <- flextable::align(ft, align = "right",
+                           part = "body", j = cols_num)
+  }
+  if (length(cols_chr) > 0) {
+    ft <- flextable::align(ft, align = "left",
+                           part = "body", j = cols_chr)
+  }
+
+  ft <- flextable::autofit(ft)
 
   # Agregar titulo arriba y nota abajo
   ft_apa <- ft |>
@@ -92,7 +98,7 @@ exportar_word <- function(data,
                     part = "header", i = 1) |>
     flextable::fontsize(size = 11, part = "header", i = 1) |>
     flextable::border(
-      part = "header", i = 1,
+      part          = "header", i = 1,
       border.top    = officer::fp_border(width = 0),
       border.bottom = officer::fp_border(width = 0)
     ) |>
@@ -102,7 +108,7 @@ exportar_word <- function(data,
                     part = "footer", i = 1) |>
     flextable::fontsize(size = 10, part = "footer", i = 1) |>
     flextable::border(
-      part = "footer", i = 1,
+      part          = "footer", i = 1,
       border.top    = officer::fp_border(width = 0),
       border.bottom = officer::fp_border(width = 0)
     )
@@ -159,10 +165,15 @@ exportar_word_multiples <- function(tablas,
     titulo_i <- if (!is.null(names(tablas)[i]) &&
                     names(tablas)[i] != "")
       names(tablas)[i]
-    else paste0("Tabla ", i)
+    else
+      paste0("Tabla ", i)
 
     nota_i <- paste0("Nota. Elaboracion propia con datos de ",
                      fuente, ".")
+
+    # Identificar columnas (type-safe con vapply)
+    cols_num_i <- which(vapply(tablas[[i]], is.numeric, logical(1)))
+    cols_chr_i <- which(vapply(tablas[[i]], is.character, logical(1)))
 
     ft_i <- flextable::flextable(tablas[[i]]) |>
       flextable::font(fontname = "Times New Roman", part = "all") |>
@@ -181,15 +192,18 @@ exportar_word_multiples <- function(tablas,
         border = officer::fp_border(width = 1.5),
         part   = "body"
       ) |>
-      flextable::align(align = "left",  part = "header") |>
-      flextable::align(
-        align = "right", part = "body",
-        j = which(sapply(tablas[[i]], is.numeric))
-      ) |>
-      flextable::align(
-        align = "left", part = "body",
-        j = which(sapply(tablas[[i]], is.character))
-      ) |>
+      flextable::align(align = "left", part = "header")
+
+    if (length(cols_num_i) > 0) {
+      ft_i <- flextable::align(ft_i, align = "right",
+                               part = "body", j = cols_num_i)
+    }
+    if (length(cols_chr_i) > 0) {
+      ft_i <- flextable::align(ft_i, align = "left",
+                               part = "body", j = cols_chr_i)
+    }
+
+    ft_i <- ft_i |>
       flextable::autofit() |>
       flextable::add_header_lines(values = titulo_i) |>
       flextable::add_footer_lines(values = nota_i) |>
@@ -198,12 +212,12 @@ exportar_word_multiples <- function(tablas,
       flextable::italic(part = "footer", i = 1) |>
       flextable::align(part = "footer", i = 1, align = "left") |>
       flextable::border(
-        part = "header", i = 1,
+        part          = "header", i = 1,
         border.top    = officer::fp_border(width = 0),
         border.bottom = officer::fp_border(width = 0)
       ) |>
       flextable::border(
-        part = "footer", i = 1,
+        part          = "footer", i = 1,
         border.top    = officer::fp_border(width = 0),
         border.bottom = officer::fp_border(width = 0)
       )

@@ -31,7 +31,7 @@ ine_trimestres_disponibles <- function() {
       grepl("REG02_EPHC", .data$dataset, ignore.case = TRUE)
     )
 
-  # Extraer anio desde la URL
+  # Extraer anio y trimestre desde la URL
   ephc <- ephc |>
     dplyr::mutate(
       anio = as.integer(
@@ -235,7 +235,8 @@ ine_anio_completo <- function(anio = NULL, verbose = TRUE) {
     }
   }
 
-  lista <- lista[!sapply(lista, is.null)]
+  # Eliminar trimestres que fallaron (type-safe con vapply)
+  lista <- lista[!vapply(lista, is.null, logical(1))]
 
   if (length(lista) == 0) {
     stop("No se pudo descargar ningun trimestre de ", anio)
