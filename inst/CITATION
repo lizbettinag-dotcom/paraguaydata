@@ -1,0 +1,11 @@
+bibentry(
+  bibtype  = "Manual",
+  title    = paste("paraguaydata: Access and Analyze Open",
+                   "Educational and Labor Data from Paraguay"),
+  author   = person("Liz Bettina", "Garcia Martinez",
+                    email = "lizbettinag@gmail.com",
+                    role  = c("aut", "cre")),
+  year     = "2026",
+  note     = "R package version 0.1.0",
+  url      = "https://github.com/lizbettinag-dotcom/paraguaydata"
+)
