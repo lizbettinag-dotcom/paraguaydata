@@ -1,7 +1,7 @@
 # =============================================================================
 # Funciones de exportacion de tablas para publicaciones academicas
-# Genera tablas formateadas en Word (.docx) y PDF listas para articulos
-# Usa flextable y officer para formato APA 7ma edicion
+# Genera tablas formateadas en Word (.docx) listas para articulos
+# Usa flextable 0.9.x y officer 0.7.x
 # =============================================================================
 
 #' Exportar tabla a Word formateada para publicacion
@@ -10,7 +10,7 @@
 #' Exporta cualquier data.frame a un archivo Word (.docx) con
 #' formato APA 7ma edicion. La tabla incluye titulo, nota al pie
 #' con la fuente, bordes y tipografia adecuados para publicaciones
-#' academicas.
+#' academicas. Compatible con los formatos del CIDUNAE-UNAE.
 #'
 #' @param data data.frame a exportar.
 #' @param archivo Ruta del archivo de salida. Por defecto
@@ -49,18 +49,15 @@ exportar_word <- function(data,
   }
 
   if (is.null(nota)) {
-    nota <- paste0("Nota. Elaboracion propia con datos de ", fuente, ".")
+    nota <- paste0("Nota. Elaboracion propia con datos de ",
+                   fuente, ".")
   }
 
-  # Crear tabla con flextable
+  # Crear tabla base con formato APA
   ft <- flextable::flextable(data) |>
-    # Fuente y tamano
     flextable::font(fontname = "Times New Roman", part = "all") |>
     flextable::fontsize(size = 11, part = "all") |>
-    flextable::fontsize(size = 11, part = "header") |>
-    # Negrita en encabezado
     flextable::bold(part = "header") |>
-    # Bordes APA (solo horizontal arriba, abajo encabezado, abajo tabla)
     flextable::border_remove() |>
     flextable::hline_top(
       border = officer::fp_border(width = 1.5),
@@ -74,26 +71,43 @@ exportar_word <- function(data,
       border = officer::fp_border(width = 1.5),
       part   = "body"
     ) |>
-    # Alineacion
     flextable::align(align = "left",  part = "header") |>
-    flextable::align(align = "right", part = "body",
-                     j = which(sapply(data, is.numeric))) |>
-    flextable::align(align = "left",  part = "body",
-                     j = which(sapply(data, is.character))) |>
-    # Ancho automatico
+    flextable::align(
+      align = "right", part = "body",
+      j     = which(sapply(data, is.numeric))
+    ) |>
+    flextable::align(
+      align = "left", part = "body",
+      j     = which(sapply(data, is.character))
+    ) |>
     flextable::autofit()
 
-  # Crear documento Word
-  doc <- officer::read_docx() |>
-    # Titulo de la tabla (formato APA: negrita, antes de la tabla)
-    officer::body_add_par(titulo,
-                          style = "Normal") |>
-    officer::body_add_flextable(ft) |>
-    # Nota al pie
-    officer::body_add_par(nota, style = "Normal")
+  # Agregar titulo arriba y nota abajo
+  ft_apa <- ft |>
+    flextable::add_header_lines(values = titulo) |>
+    flextable::add_footer_lines(values = nota) |>
+    flextable::bold(part = "header", i = 1) |>
+    flextable::align(part = "header", i = 1, align = "left") |>
+    flextable::font(fontname = "Times New Roman",
+                    part = "header", i = 1) |>
+    flextable::fontsize(size = 11, part = "header", i = 1) |>
+    flextable::border(
+      part = "header", i = 1,
+      border.top    = officer::fp_border(width = 0),
+      border.bottom = officer::fp_border(width = 0)
+    ) |>
+    flextable::italic(part = "footer", i = 1) |>
+    flextable::align(part = "footer", i = 1, align = "left") |>
+    flextable::font(fontname = "Times New Roman",
+                    part = "footer", i = 1) |>
+    flextable::fontsize(size = 10, part = "footer", i = 1) |>
+    flextable::border(
+      part = "footer", i = 1,
+      border.top    = officer::fp_border(width = 0),
+      border.bottom = officer::fp_border(width = 0)
+    )
 
-  # Aplicar italica a "Nota."
-  print(doc, target = archivo)
+  flextable::save_as_docx(ft_apa, path = archivo)
 
   message("Tabla exportada a: ", archivo)
   invisible(archivo)
@@ -108,10 +122,8 @@ exportar_word <- function(data,
 #' tablas de un articulo academico o capitulo de tesis en un
 #' solo archivo.
 #'
-#' @param tablas Lista nombrada de data.frames. Los nombres se
-#'   usan como titulos de cada tabla.
-#' @param archivo Ruta del archivo de salida. Por defecto
-#'   "tablas.docx".
+#' @param tablas Lista nombrada de data.frames.
+#' @param archivo Ruta del archivo de salida.
 #' @param fuente Fuente de los datos para las notas al pie.
 #'
 #' @return Invisible. Guarda el archivo .docx.
@@ -124,9 +136,7 @@ exportar_word <- function(data,
 #'   "Tabla 1. Desempleo por sexo" =
 #'     tasa_desempleo(ephc, grupo = "sexo"),
 #'   "Tabla 2. Informalidad por area" =
-#'     tasa_informalidad(ephc, grupo = "area"),
-#'   "Tabla 3. Indicadores ODS 4" =
-#'     ods4_ephc(ephc)
+#'     tasa_informalidad(ephc, grupo = "area")
 #' )
 #' exportar_word_multiples(mis_tablas,
 #'   archivo = "tablas_articulo.docx")
@@ -140,10 +150,10 @@ exportar_word_multiples <- function(tablas,
   }
 
   if (!requireNamespace("flextable", quietly = TRUE)) {
-    stop("Instala el paquete flextable: install.packages('flextable')")
+    stop("Instala flextable: install.packages('flextable')")
   }
 
-  doc <- officer::read_docx()
+  lista_ft <- vector("list", length(tablas))
 
   for (i in seq_along(tablas)) {
     titulo_i <- if (!is.null(names(tablas)[i]) &&
@@ -155,8 +165,7 @@ exportar_word_multiples <- function(tablas,
                      fuente, ".")
 
     ft_i <- flextable::flextable(tablas[[i]]) |>
-      flextable::font(fontname = "Times New Roman",
-                      part = "all") |>
+      flextable::font(fontname = "Times New Roman", part = "all") |>
       flextable::fontsize(size = 11, part = "all") |>
       flextable::bold(part = "header") |>
       flextable::border_remove() |>
@@ -178,23 +187,35 @@ exportar_word_multiples <- function(tablas,
         j = which(sapply(tablas[[i]], is.numeric))
       ) |>
       flextable::align(
-        align = "left",  part = "body",
+        align = "left", part = "body",
         j = which(sapply(tablas[[i]], is.character))
       ) |>
-      flextable::autofit()
+      flextable::autofit() |>
+      flextable::add_header_lines(values = titulo_i) |>
+      flextable::add_footer_lines(values = nota_i) |>
+      flextable::bold(part = "header", i = 1) |>
+      flextable::align(part = "header", i = 1, align = "left") |>
+      flextable::italic(part = "footer", i = 1) |>
+      flextable::align(part = "footer", i = 1, align = "left") |>
+      flextable::border(
+        part = "header", i = 1,
+        border.top    = officer::fp_border(width = 0),
+        border.bottom = officer::fp_border(width = 0)
+      ) |>
+      flextable::border(
+        part = "footer", i = 1,
+        border.top    = officer::fp_border(width = 0),
+        border.bottom = officer::fp_border(width = 0)
+      )
 
-    # Agregar salto de pagina entre tablas (excepto la primera)
-    if (i > 1) {
-      doc <- officer::body_add_break(doc)
-    }
-
-    doc <- doc |>
-      officer::body_add_par(titulo_i, style = "Normal") |>
-      officer::body_add_flextable(ft_i) |>
-      officer::body_add_par(nota_i, style = "Normal")
+    lista_ft[[i]] <- ft_i
   }
 
-  print(doc, target = archivo)
+  do.call(
+    flextable::save_as_docx,
+    c(lista_ft, list(path = archivo))
+  )
+
   message(length(tablas), " tablas exportadas a: ", archivo)
   invisible(archivo)
 }
@@ -204,9 +225,8 @@ exportar_word_multiples <- function(tablas,
 #'
 #' @description
 #' Exporta la tabla de indicadores ODS 4 a Word con formato
-#' especial que resalta los codigos ODS y presenta los valores
-#' con sus unidades de medida. Disenada especificamente para
-#' articulos sobre desarrollo humano y politica educativa.
+#' especial que resalta los codigos ODS. Disenada para articulos
+#' sobre desarrollo humano y politica educativa.
 #'
 #' @param data data.frame resultado de ods4_resumen() o ods4_ephc().
 #' @param archivo Ruta del archivo de salida.
@@ -231,7 +251,6 @@ exportar_ods4_word <- function(data,
     stop("Instala flextable: install.packages('flextable')")
   }
 
-  # Seleccionar y formatear columnas relevantes
   cols_mostrar <- intersect(
     c("codigo_ods", "indicador", "valor", "unidad",
       "fuente", "anio"),
@@ -239,49 +258,22 @@ exportar_ods4_word <- function(data,
   )
 
   data_fmt <- data[, cols_mostrar] |>
-    dplyr::mutate(
-      valor = round(.data$valor, 2)
-    )
+    dplyr::mutate(valor = round(.data$valor, 2))
 
-  ft <- flextable::flextable(data_fmt) |>
-    flextable::font(fontname = "Times New Roman", part = "all") |>
-    flextable::fontsize(size = 11, part = "all") |>
-    flextable::bold(part = "header") |>
-    flextable::bold(j = "codigo_ods", part = "body") |>
-    flextable::border_remove() |>
-    flextable::hline_top(
-      border = officer::fp_border(width = 1.5),
-      part   = "header"
-    ) |>
-    flextable::hline(
-      border = officer::fp_border(width = 1),
-      part   = "header"
-    ) |>
-    flextable::hline_bottom(
-      border = officer::fp_border(width = 1.5),
-      part   = "body"
-    ) |>
-    flextable::set_header_labels(
-      codigo_ods = "Codigo ODS",
-      indicador  = "Indicador",
-      valor      = "Valor",
-      unidad     = "Unidad",
-      fuente     = "Fuente",
-      anio       = "Anio"
-    ) |>
-    flextable::autofit()
+  nota <- paste0(
+    "Nota. Indicadores alineados con el marco de monitoreo ",
+    "UNESCO/ONU Agenda 2030. Elaboracion propia con datos de ",
+    "EPHC-INE y MEC Paraguay."
+  )
 
-  doc <- officer::read_docx() |>
-    officer::body_add_par(titulo, style = "Normal") |>
-    officer::body_add_flextable(ft) |>
-    officer::body_add_par(
-      paste0("Nota. Indicadores alineados con el marco de ",
-             "monitoreo UNESCO/ONU Agenda 2030. ",
-             "Elaboracion propia con datos de EPHC-INE y MEC Paraguay."),
-      style = "Normal"
-    )
+  exportar_word(
+    data_fmt,
+    archivo = archivo,
+    titulo  = titulo,
+    nota    = nota,
+    fuente  = "EPHC-INE y MEC Paraguay"
+  )
 
-  print(doc, target = archivo)
   message("Tabla ODS 4 exportada a: ", archivo)
   invisible(archivo)
 }
