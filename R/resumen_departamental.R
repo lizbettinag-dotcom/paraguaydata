@@ -85,9 +85,12 @@ resumen_departamental <- function(data, ponderado = TRUE) {
     }, error = function(e) NA_real_)
 
     # Corregir vectores vacios
-    escolarizacion <- if (length(escolarizacion) == 0) NA_real_ else escolarizacion
-    anos_estudio   <- if (length(anos_estudio) == 0)   NA_real_ else anos_estudio
-    rezago         <- if (length(rezago) == 0)         NA_real_ else rezago
+    escolarizacion <- if (length(escolarizacion) == 0)
+      NA_real_ else escolarizacion
+    anos_estudio   <- if (length(anos_estudio) == 0)
+      NA_real_ else anos_estudio
+    rezago         <- if (length(rezago) == 0)
+      NA_real_ else rezago
     desempleo      <- if (length(desempleo) == 0)      NA_real_ else desempleo
     informalidad   <- if (length(informalidad) == 0)   NA_real_ else informalidad
     subempleo      <- if (length(subempleo) == 0)      NA_real_ else subempleo

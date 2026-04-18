@@ -216,9 +216,15 @@ ine_geo <- function(nivel = "departamentos") {
   }
 
   urls <- list(
-    departamentos = "https://www.ine.gov.py/microdatos/register/localidades/Departamentos_Paraguay_Codigos_DGEEC.csv",
-    distritos     = "https://www.ine.gov.py/microdatos/register/localidades/Distritos_Paraguay_Codigos_DGEEC.csv",
-    barrios       = "https://www.ine.gov.py/microdatos/register/localidades/Barrios_Localidades_Paraguay_Codigos_DGEEC.csv"
+    departamentos = paste0(
+      "https://www.ine.gov.py/microdatos/register/localidades/",
+      "Departamentos_Paraguay_Codigos_DGEEC.csv"),
+    distritos = paste0(
+      "https://www.ine.gov.py/microdatos/register/localidades/",
+      "Distritos_Paraguay_Codigos_DGEEC.csv"),
+    barrios = paste0(
+      "https://www.ine.gov.py/microdatos/register/localidades/",
+      "Barrios_Localidades_Paraguay_Codigos_DGEEC.csv")
   )
 
   message("Descargando codigos de ", nivel, "...")
