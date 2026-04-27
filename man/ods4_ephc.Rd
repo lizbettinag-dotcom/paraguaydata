@@ -37,7 +37,7 @@ Indicadores calculados:
 }
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 ods4_ephc(ephc)
 }

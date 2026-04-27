@@ -30,7 +30,7 @@ compacta el perfil de desarrollo humano territorial de Paraguay.
 Disenado para publicaciones academicas con multiples dimensiones.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 grafico_resumen_departamental(ephc)
 

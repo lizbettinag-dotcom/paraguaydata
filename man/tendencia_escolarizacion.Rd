@@ -36,7 +36,7 @@ evolucion de indicadores educativos a lo largo del tiempo,
 con desagregacion opcional por area o sexo.
 }
 \examples{
-\dontrun{
+\donttest{
 serie <- ine_serie(2022, 2024, trimestres = 1)
 
 # Evolucion de escolarizacion

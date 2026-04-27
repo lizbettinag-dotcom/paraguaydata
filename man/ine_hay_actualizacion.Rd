@@ -22,7 +22,7 @@ automatizar la actualizacion de analisis cuando el INE
 publica nuevos datos trimestrales.
 }
 \examples{
-\dontrun{
+\donttest{
 # Verificar si hay datos mas nuevos que los de 2024 T1
 ine_hay_actualizacion(anio_actual = 2024, trimestre_actual = 1)
 }

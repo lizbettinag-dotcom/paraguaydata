@@ -27,7 +27,7 @@ tablas de un articulo academico o capitulo de tesis en un
 solo archivo.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 mis_tablas <- list(
   "Tabla 1. Desempleo por sexo" =
@@ -36,6 +36,6 @@ mis_tablas <- list(
     tasa_informalidad(ephc, grupo = "area")
 )
 exportar_word_multiples(mis_tablas,
-  archivo = "tablas_articulo.docx")
+  archivo = tempfile(fileext = ".docx"))
 }
 }

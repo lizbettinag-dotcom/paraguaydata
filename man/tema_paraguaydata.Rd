@@ -15,7 +15,7 @@ para publicaciones academicas. Tipografia limpia, sin fondo gris,
 con grilla suave y etiquetas legibles.
 }
 \examples{
-\dontrun{
+\donttest{
 library(ggplot2)
 ggplot() + tema_paraguaydata()
 }

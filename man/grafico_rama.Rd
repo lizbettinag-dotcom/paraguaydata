@@ -21,7 +21,7 @@ Las barras horizontales facilitan la lectura de etiquetas largas
 en publicaciones academicas.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 grafico_rama(ephc)
 }

@@ -27,7 +27,7 @@ donde 1 = urbana y 6 = rural. Se calculan diferencias absolutas
 (puntos porcentuales) y relativas (ratio urbano/rural).
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 brecha_urbano_rural(ephc)
 brecha_urbano_rural(ephc, indicador = "anos_estudio")

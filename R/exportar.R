@@ -26,11 +26,11 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' tabla <- tasa_desempleo(ephc, grupo = "sexo")
 #' exportar_word(tabla,
-#'   archivo = "tabla_desempleo.docx",
+#'   archivo = tempfile(fileext = ".docx"),
 #'   titulo  = "Tabla 1. Tasa de desempleo por sexo, Paraguay 2024",
 #'   fuente  = "EPHC T1 2024 - INE Paraguay")
 #' }
@@ -136,7 +136,7 @@ exportar_word <- function(data,
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' mis_tablas <- list(
 #'   "Tabla 1. Desempleo por sexo" =
@@ -145,7 +145,7 @@ exportar_word <- function(data,
 #'     tasa_informalidad(ephc, grupo = "area")
 #' )
 #' exportar_word_multiples(mis_tablas,
-#'   archivo = "tablas_articulo.docx")
+#'   archivo = tempfile(fileext = ".docx"))
 #' }
 exportar_word_multiples <- function(tablas,
                                     archivo = "tablas.docx",
@@ -250,11 +250,11 @@ exportar_word_multiples <- function(tablas,
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' resumen_ods <- ods4_resumen(ephc = ephc)
 #' exportar_ods4_word(resumen_ods,
-#'   archivo = "tabla_ods4.docx",
+#'   archivo = tempfile(fileext = ".docx"),
 #'   titulo  = "Tabla 1. Indicadores ODS 4 Paraguay 2024")
 #' }
 exportar_ods4_word <- function(data,

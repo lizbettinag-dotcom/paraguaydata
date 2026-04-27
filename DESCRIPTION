@@ -3,7 +3,18 @@ Title: Access and Analyze Open Educational and Labor Data from Paraguay
 Version: 0.1.0
 Authors@R: 
     person("Liz Bettina", "Garcia Martinez", , "lizbettinag@gmail.com", role = c("aut", "cre"))
-Description: Provides tools to access, download and analyze open data from Paraguay's main statistical sources, including the Permanent Household Survey (EPHC) from the National Statistics Institute (INE), administrative records from the Ministry of Education (MEC), and PISA 2022 results. Functions cover educational indicators (enrollment, dropout, years of schooling), labor market indicators (unemployment, informality, underemployment), multidimensional poverty, SDG 4 monitoring, and territorial disaggregation by department. Includes automatic detection of newly available INE data and export tools for academic publications in APA format.
+Description: Provides tools to access, download and analyze open data from
+    Paraguay's main statistical sources, including the Permanent Household
+    Survey (EPHC) from the National Statistics Institute (INE), administrative
+    records from the Ministry of Education (MEC), and PISA 2022 results.
+    Functions cover educational indicators (enrollment, dropout, years of
+    schooling), labor market indicators (unemployment, informality,
+    underemployment), multidimensional poverty, SDG 4 monitoring, and
+    territorial disaggregation by department. Includes automatic detection of
+    newly available INE data and export tools for academic publications in APA
+    format. Data is accessed from the INE open data portal
+    <https://www.ine.gov.py> and the MEC open data portal
+    <https://datos.mec.gov.py>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

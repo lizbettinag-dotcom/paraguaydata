@@ -33,7 +33,7 @@ insumo clave para investigacion sobre desigualdades territoriales
 en educacion (PNUD, 2019).
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 educacion_por_departamento(ephc)
 educacion_por_departamento(ephc, indicador = "anos_estudio")

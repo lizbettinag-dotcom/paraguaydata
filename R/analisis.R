@@ -33,7 +33,7 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' tasa_escolarizacion(ephc)
 #' tasa_escolarizacion(ephc, grupo = "area")
@@ -126,7 +126,7 @@ tasa_escolarizacion <- function(data,
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' anios_promedio_estudio(ephc)
 #' anios_promedio_estudio(ephc, edad_min = 15, ponderado = FALSE)
@@ -193,7 +193,7 @@ anios_promedio_estudio <- function(data,
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' rezago_educativo(ephc)
 #' }
@@ -272,7 +272,7 @@ rezago_educativo <- function(data, ponderado = TRUE) {
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' brecha_urbano_rural(ephc)
 #' brecha_urbano_rural(ephc, indicador = "anos_estudio")
@@ -362,7 +362,7 @@ brecha_urbano_rural <- function(data,
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' brecha_genero(ephc)
 #' brecha_genero(ephc, indicador = "anos_estudio")
@@ -455,7 +455,7 @@ brecha_genero <- function(data,
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' ipm  <- ine_ipm(2024)
 #' educacion_pobreza(ephc, ipm)

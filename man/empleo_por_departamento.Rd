@@ -27,7 +27,7 @@ departamento. Permite analizar las heterogeneidades territoriales
 en empleo, informalidad y subempleo en Paraguay.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 empleo_por_departamento(ephc)
 empleo_por_departamento(ephc, indicador = "desempleo")

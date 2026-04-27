@@ -17,7 +17,7 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ine_trimestres_disponibles()
 #' }
 ine_trimestres_disponibles <- function() {
@@ -85,7 +85,7 @@ ine_trimestres_disponibles <- function() {
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Siempre descarga los datos mas recientes disponibles
 #' ephc <- ine_ultimo_trimestre()
 #' }
@@ -133,7 +133,7 @@ ine_ultimo_trimestre <- function(verbose = TRUE) {
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Verificar si hay datos mas nuevos que los de 2024 T1
 #' ine_hay_actualizacion(anio_actual = 2024, trimestre_actual = 1)
 #' }
@@ -179,7 +179,7 @@ ine_hay_actualizacion <- function(anio_actual, trimestre_actual) {
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Descargar todos los trimestres disponibles de 2024
 #' ephc_2024 <- ine_anio_completo(2024)
 #'

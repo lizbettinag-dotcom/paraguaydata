@@ -38,7 +38,7 @@ rango de edad. Usa la variable A05 de la EPHC (1 = asiste, 6 = no
 asiste) y permite ponderacion por factor de expansion.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 tasa_escolarizacion(ephc)
 tasa_escolarizacion(ephc, grupo = "area")

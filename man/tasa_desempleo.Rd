@@ -28,7 +28,7 @@ Usa la variable PEAD de la EPHC donde 1 = ocupado y
 2 = desocupado abierto (OIT, 2013).
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 tasa_desempleo(ephc)
 tasa_desempleo(ephc, grupo = "sexo")

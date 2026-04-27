@@ -35,7 +35,7 @@ en publicaciones academicas. Los departamentos se ordenan
 de mayor a menor valor.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 grafico_departamentos(ephc)
 grafico_departamentos(ephc, indicador = "anos_estudio")

@@ -28,7 +28,7 @@ Informalidad de la EPHC donde 1 = informal y 2 = formal
 (OIT, 2015; INE Paraguay).
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 tasa_informalidad(ephc)
 tasa_informalidad(ephc, grupo = "sexo")

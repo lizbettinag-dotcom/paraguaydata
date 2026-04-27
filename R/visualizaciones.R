@@ -13,7 +13,7 @@
 #' @return Un objeto theme de ggplot2.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(ggplot2)
 #' ggplot() + tema_paraguaydata()
 #' }
@@ -56,7 +56,7 @@ tema_paraguaydata <- function() {
 #' @return Un objeto ggplot2.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' grafico_escolarizacion(ephc)
 #' grafico_escolarizacion(ephc, grupo = "sexo")
@@ -130,7 +130,7 @@ grafico_escolarizacion <- function(data,
 #' @return Un objeto ggplot2.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' grafico_brecha(ephc)
 #' grafico_brecha(ephc, tipo = "genero")
@@ -229,7 +229,7 @@ grafico_brecha <- function(data,
 #' @return Un objeto ggplot2.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' grafico_empleo(ephc)
 #' grafico_empleo(ephc, grupo = "sexo")
@@ -350,7 +350,7 @@ grafico_empleo <- function(data, grupo = "ninguno") {
 #' @return Un objeto ggplot2.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' serie <- ine_serie(2022, 2024, trimestres = 1)
 #' grafico_tendencia(serie)
 #' grafico_tendencia(serie, grupo = "area")
@@ -454,7 +454,7 @@ grafico_tendencia <- function(serie,
 #' @return Un objeto ggplot2.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' grafico_rama(ephc)
 #' }

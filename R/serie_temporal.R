@@ -17,7 +17,7 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Serie 2022-2024
 #' serie <- ine_serie(anio_inicio = 2022, anio_fin = 2024)
 #'
@@ -104,7 +104,7 @@ ine_serie <- function(anio_inicio = 2022,
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' serie <- ine_serie(2022, 2024, trimestres = 1)
 #'
 #' # Evolucion de escolarizacion

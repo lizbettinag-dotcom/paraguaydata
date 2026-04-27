@@ -24,7 +24,7 @@ de Paraguay. Permite identificar la estructura productiva del
 mercado laboral.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 distribucion_rama(ephc)
 }

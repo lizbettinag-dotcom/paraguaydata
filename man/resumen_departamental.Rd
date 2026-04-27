@@ -28,7 +28,7 @@ es el insumo principal para analisis multidimensionales y
 articulos sobre desigualdad territorial (Sen, 1999; PNUD, 2019).
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 resumen <- resumen_departamental(ephc)
 print(resumen)

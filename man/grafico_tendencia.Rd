@@ -32,7 +32,7 @@ tendencia_escolarizacion(). Ideal para articulos que analizan
 cambios en el tiempo.
 }
 \examples{
-\dontrun{
+\donttest{
 serie <- ine_serie(2022, 2024, trimestres = 1)
 grafico_tendencia(serie)
 grafico_tendencia(serie, grupo = "area")

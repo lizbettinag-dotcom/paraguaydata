@@ -19,7 +19,7 @@ Descarga el catalogo completo de microdatos disponibles en el portal
 del Instituto Nacional de Estadistica (INE) de Paraguay.
 }
 \examples{
-\dontrun{
+\donttest{
 catalogo <- ine_catalogo()
 csvs <- catalogo[catalogo$formato == "CSV", ]
 ephc <- catalogo[grepl("EPHC", catalogo$dataset), ]

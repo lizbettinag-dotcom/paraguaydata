@@ -26,7 +26,7 @@ data.frame. Permite construir series temporales para analisis
 de tendencias en educacion, empleo y condiciones de vida.
 }
 \examples{
-\dontrun{
+\donttest{
 # Serie 2022-2024
 serie <- ine_serie(anio_inicio = 2022, anio_fin = 2024)
 

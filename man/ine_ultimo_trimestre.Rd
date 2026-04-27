@@ -21,7 +21,7 @@ forma mas sencilla de trabajar siempre con datos actualizados
 sin necesidad de conocer el numero de trimestre o anio.
 }
 \examples{
-\dontrun{
+\donttest{
 # Siempre descarga los datos mas recientes disponibles
 ephc <- ine_ultimo_trimestre()
 }

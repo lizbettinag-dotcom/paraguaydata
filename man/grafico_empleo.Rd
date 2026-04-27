@@ -21,7 +21,7 @@ del mercado laboral: desempleo, informalidad y subempleo.
 Disenado para comparacion rapida en publicaciones academicas.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 grafico_empleo(ephc)
 grafico_empleo(ephc, grupo = "sexo")

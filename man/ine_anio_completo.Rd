@@ -23,7 +23,7 @@ ine_serie() cuando se quiere trabajar con un anio completo
 de datos sin especificar trimestres manualmente.
 }
 \examples{
-\dontrun{
+\donttest{
 # Descargar todos los trimestres disponibles de 2024
 ephc_2024 <- ine_anio_completo(2024)
 

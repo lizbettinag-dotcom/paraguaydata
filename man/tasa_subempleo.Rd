@@ -30,7 +30,7 @@ menos de 30 horas semanales y desean trabajar mas horas
 (OIT, 2013). Usa la variable HORAB (horas trabajadas) de la EPHC.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 tasa_subempleo(ephc)
 tasa_subempleo(ephc, umbral_horas = 20)

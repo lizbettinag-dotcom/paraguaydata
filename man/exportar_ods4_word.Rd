@@ -26,11 +26,11 @@ especial que resalta los codigos ODS. Disenada para articulos
 sobre desarrollo humano y politica educativa.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 resumen_ods <- ods4_resumen(ephc = ephc)
 exportar_ods4_word(resumen_ods,
-  archivo = "tabla_ods4.docx",
+  archivo = tempfile(fileext = ".docx"),
   titulo  = "Tabla 1. Indicadores ODS 4 Paraguay 2024")
 }
 }

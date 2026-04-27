@@ -31,7 +31,7 @@ educativas entre grupos. Incluye la brecha absoluta como
 anotacion para facilitar la interpretacion academica.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 grafico_brecha(ephc)
 grafico_brecha(ephc, tipo = "genero")

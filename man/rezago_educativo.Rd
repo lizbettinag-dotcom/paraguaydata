@@ -25,7 +25,7 @@ Usa A14REC para el nivel educativo (1-8) y A05 para asistencia
 (1 = asiste).
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 rezago_educativo(ephc)
 }

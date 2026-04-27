@@ -27,7 +27,7 @@ a la educacion (Sen, 1999; Alkire y Foster, 2011). La union se
 realiza por identificador de hogar construido desde UPM, NVIVI y NHOGA.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 ipm  <- ine_ipm(2024)
 educacion_pobreza(ephc, ipm)

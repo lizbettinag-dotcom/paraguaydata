@@ -27,7 +27,7 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' tasa_desempleo(ephc)
 #' tasa_desempleo(ephc, grupo = "sexo")
@@ -118,7 +118,7 @@ tasa_desempleo <- function(data,
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' tasa_informalidad(ephc)
 #' tasa_informalidad(ephc, grupo = "sexo")
@@ -210,7 +210,7 @@ tasa_informalidad <- function(data,
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' tasa_subempleo(ephc)
 #' tasa_subempleo(ephc, umbral_horas = 20)
@@ -305,7 +305,7 @@ tasa_subempleo <- function(data,
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' distribucion_rama(ephc)
 #' }

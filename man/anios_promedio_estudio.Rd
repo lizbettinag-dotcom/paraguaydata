@@ -25,7 +25,7 @@ A17A de la EPHC que registra directamente los anos de estudio
 acumulados de cada persona.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 anios_promedio_estudio(ephc)
 anios_promedio_estudio(ephc, edad_min = 15, ponderado = FALSE)

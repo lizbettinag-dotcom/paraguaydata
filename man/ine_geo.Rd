@@ -25,7 +25,7 @@ microdatos del INE para identificar departamentos, distritos
 y barrios.
 }
 \examples{
-\dontrun{
+\donttest{
 deptos <- ine_geo("departamentos")
 distritos <- ine_geo("distritos")
 barrios <- ine_geo("barrios")

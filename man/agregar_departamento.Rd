@@ -22,7 +22,7 @@ departamentales. Nota: la EPHC trimestral no cubre los
 departamentos de Boqueron y Alto Paraguay.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 ephc <- agregar_departamento(ephc)
 table(ephc$departamento)

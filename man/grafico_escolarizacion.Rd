@@ -23,7 +23,7 @@ desagregada por area geografica o sexo. Listo para publicacion
 academica con fuente y titulo incluidos.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 grafico_escolarizacion(ephc)
 grafico_escolarizacion(ephc, grupo = "sexo")

@@ -28,7 +28,7 @@ paridad; menor a 1 indica desventaja femenina. Usa P06 de la EPHC
 donde 1 = hombre y 6 = mujer.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 brecha_genero(ephc)
 brecha_genero(ephc, indicador = "anos_estudio")

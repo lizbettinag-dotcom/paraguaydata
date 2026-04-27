@@ -37,11 +37,11 @@ con la fuente, bordes y tipografia adecuados para publicaciones
 academicas. Compatible con los formatos del CIDUNAE-UNAE.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc <- ine_ephc(2024, 1)
 tabla <- tasa_desempleo(ephc, grupo = "sexo")
 exportar_word(tabla,
-  archivo = "tabla_desempleo.docx",
+  archivo = tempfile(fileext = ".docx"),
   titulo  = "Tabla 1. Tasa de desempleo por sexo, Paraguay 2024",
   fuente  = "EPHC T1 2024 - INE Paraguay")
 }

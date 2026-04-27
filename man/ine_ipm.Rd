@@ -30,7 +30,7 @@ El IPM mide la pobreza considerando multiples dimensiones como
 educacion, salud, vivienda y empleo.
 }
 \examples{
-\dontrun{
+\donttest{
 ipm_2024 <- ine_ipm(anio = 2024)
 dim(ipm_2024)
 table(ipm_2024$pobrezai)

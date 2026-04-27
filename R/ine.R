@@ -11,7 +11,7 @@
 #' }
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' catalogo <- ine_catalogo()
 #' csvs <- catalogo[catalogo$formato == "CSV", ]
 #' ephc <- catalogo[grepl("EPHC", catalogo$dataset), ]
@@ -66,7 +66,7 @@ ine_catalogo <- function() {
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc_2024_t1 <- ine_ephc(anio = 2024, trimestre = 1)
 #' dim(ephc_2024_t1)
 #' table(ephc_2024_t1$AREA)
@@ -140,7 +140,7 @@ ine_ephc <- function(anio = 2024, trimestre = 1) {
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ipm_2024 <- ine_ipm(anio = 2024)
 #' dim(ipm_2024)
 #' table(ipm_2024$pobrezai)
@@ -197,7 +197,7 @@ ine_ipm <- function(anio = 2024) {
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' deptos <- ine_geo("departamentos")
 #' distritos <- ine_geo("distritos")
 #' barrios <- ine_geo("barrios")

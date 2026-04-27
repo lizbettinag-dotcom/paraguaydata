@@ -22,7 +22,7 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' ephc <- agregar_departamento(ephc)
 #' table(ephc$departamento)
@@ -81,7 +81,7 @@ agregar_departamento <- function(data) {
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' educacion_por_departamento(ephc)
 #' educacion_por_departamento(ephc, indicador = "anos_estudio")
@@ -166,7 +166,7 @@ educacion_por_departamento <- function(data,
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' empleo_por_departamento(ephc)
 #' empleo_por_departamento(ephc, indicador = "desempleo")
@@ -247,7 +247,7 @@ empleo_por_departamento <- function(data,
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' grafico_departamentos(ephc)
 #' grafico_departamentos(ephc, indicador = "anos_estudio")

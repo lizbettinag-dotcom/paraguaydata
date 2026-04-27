@@ -17,7 +17,7 @@ verificar que datos nuevos estan disponibles sin necesidad
 de visitar el sitio web del INE manualmente.
 }
 \examples{
-\dontrun{
+\donttest{
 ine_trimestres_disponibles()
 }
 }

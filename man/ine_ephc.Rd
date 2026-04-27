@@ -32,7 +32,7 @@ La EPHC contiene informacion sobre empleo, educacion y condiciones
 de vida de los hogares paraguayos.
 }
 \examples{
-\dontrun{
+\donttest{
 ephc_2024_t1 <- ine_ephc(anio = 2024, trimestre = 1)
 dim(ephc_2024_t1)
 table(ephc_2024_t1$AREA)

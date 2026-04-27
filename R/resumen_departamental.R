@@ -26,7 +26,7 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' resumen <- resumen_departamental(ephc)
 #' print(resumen)
@@ -129,7 +129,7 @@ resumen_departamental <- function(data, ponderado = TRUE) {
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ephc <- ine_ephc(2024, 1)
 #' grafico_resumen_departamental(ephc)
 #'
